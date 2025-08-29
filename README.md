@@ -1,5 +1,4 @@
-text
-# MySQL Client-Server Architecture on AWS EC2
+#🚀 MySQL Client-Server Architecture on AWS EC2
 
 ## Overview
 
@@ -198,7 +197,7 @@ SELECT * FROM sampletable;
 
 ---
 
-## Conclusion
+## ✅ Conclusion
 
 This project provided hands-on experience with setting up and configuring a MySQL client-server architecture on AWS EC2 instances. It highlighted key aspects of cloud networking, database security, and remote access management essential for scalable and secure application deployments.
 
