@@ -41,7 +41,7 @@ Open your terminal or Git Bash and run:
 
 ssh -i /path/to/key.pem ubuntu@<MySQL_Server_Public_IP>
 
-text
+<img width="1173" height="282" alt="image" src="https://github.com/user-attachments/assets/d8f3c016-82e6-4c4f-a106-a775ad60f38a" />
 
 ---
 
@@ -52,7 +52,8 @@ Update system and install MySQL server:
 sudo apt update && sudo apt upgrade -y
 sudo apt install mysql-server -y
 
-text
+<img width="1282" height="857" alt="image" src="https://github.com/user-attachments/assets/621ce6f6-fec1-4d2d-b3fb-1e2bc19b87d1" />
+
 
 Ensure MySQL service is running and enabled:
 
@@ -60,7 +61,8 @@ sudo systemctl start mysql
 sudo systemctl enable mysql
 sudo systemctl status mysql
 
-text
+<img width="1193" height="500" alt="image" src="https://github.com/user-attachments/assets/9cece7dd-fac3-45a2-816d-8a000ee00e40" />
+
 
 ---
 
@@ -68,23 +70,26 @@ text
 
 Edit MySQL config file to listen on all interfaces:
 
-sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 
-text
+<img width="1297" height="884" alt="image" src="https://github.com/user-attachments/assets/cc1a5563-7167-4681-9150-b69d42188594" />
+
 
 Find and change:
 
 bind-address = 0.0.0.0
 
-text
+<img width="1281" height="861" alt="image" src="https://github.com/user-attachments/assets/537edf62-0c51-4c9e-8f1b-e487551529f1" />
 
-Save and exit (`Ctrl+O`, then `Ctrl+X`).
+
+Save and exit (`:wq`, then `esc`).
 
 Restart MySQL service to apply changes:
 
 sudo systemctl restart mysql
 
-text
+<img width="1311" height="60" alt="image" src="https://github.com/user-attachments/assets/51f84c14-c9d2-4577-8a9e-1f68c09aa441" />
+
 
 ---
 
@@ -94,16 +99,18 @@ Launch MySQL Shell:
 
 sudo mysql
 
-text
+<img width="1313" height="538" alt="image" src="https://github.com/user-attachments/assets/8223df00-c5f8-4fd8-b47d-1897841216fc" />
+
 
 Create a user for remote access (replace placeholders):
 
 CREATE USER 'remote_user'@'<Client_Private_IP>' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON . TO 'remote_user'@'<Client_Private_IP>' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'remote_user'@'<Client_Private_IP>' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EXIT;
 
-text
+<img width="1292" height="508" alt="image" src="https://github.com/user-attachments/assets/84b434e0-ff03-4755-bce0-d136e336fc65" />
+
 
 ---
 
@@ -111,10 +118,8 @@ text
 
 If UFW firewall is active, allow MySQL port from client:
 
-sudo ufw allow from <Client_Private_IP> to any port 3306
-sudo ufw reload
+On the AWS portal Allow port 3306 from all locations 
 
-text
 
 ---
 
@@ -124,7 +129,8 @@ SSH into client instance:
 
 ssh -i /path/to/key.pem ubuntu@<Client_Public_IP>
 
-text
+<img width="1195" height="150" alt="image" src="https://github.com/user-attachments/assets/233d8139-dbea-4ad0-947e-b542d9d513c1" />
+
 
 Install MySQL client tools:
 
@@ -140,6 +146,7 @@ mysql -h <MySQL_Server_Private_IP> -u remote_user -p
 text
 
 Enter password when prompted.
+<img width="1055" height="413" alt="image" src="https://github.com/user-attachments/assets/9f4fb80c-a42b-4952-82a0-65c4e835d9b5" />
 
 ---
 
@@ -150,17 +157,18 @@ Within MySQL shell, create test database and table:
 CREATE DATABASE testdb;
 USE testdb;
 
-CREATE TABLE sample (
+CREATE TABLE sampletable (
 id INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(100),
 email VARCHAR(100)
 );
 
-INSERT INTO sample (name, email) VALUES ('Alice', 'alice@example.com'), ('Bob', 'bob@example.com');
+INSERT INTO sampletable (name, email) VALUES ('Alice', 'alice@example.com'), ('Bob', 'bob@example.com');
 
-SELECT * FROM sample;
+SELECT * FROM sampletable;
 
-text
+<img width="1240" height="706" alt="image" src="https://github.com/user-attachments/assets/6618696e-7e5a-427e-86c9-9f706b2f07a0" />
+
 
 ---
 
@@ -182,6 +190,8 @@ text
 - **Access denied for user:**  
   - Verify user host and password.
   - Double-check grants with `SHOW GRANTS;` in MySQL.
+    <img width="1308" height="800" alt="image" src="https://github.com/user-attachments/assets/f1b27ac6-3080-496c-b7fd-f67184c01835" />
+
 - **MySQL service won’t start:**  
   - Inspect logs at `/var/log/mysql/error.log`.
   - Confirm configuration syntax is correct.
